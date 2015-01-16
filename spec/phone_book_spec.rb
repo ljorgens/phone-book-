@@ -36,4 +36,20 @@ describe(Contact) do
 			expect(Contact.clear()).to(eq([]))
 		end
 	end
+	describe(".list_names") do
+		it("lists all contacts in the contact list by name") do
+			test_contact = Contact.new({:name => "Steve Smith", :number => "555-555-5555"})
+			test_contact.save()
+			test_contact1 = Contact.new({:name => "Summer Day", :number => "666-6666"})
+			test_contact1.save()
+			expect(Contact.list_names()).to(eq(["Steve Smith", "Summer Day"]))
+		end
+	end
+	describe(".list_numbers") do
+		it("lists all numbers for a particular contact") do
+			test_contact = Contact.new({:name => "Steve Smith", :number => "555-555-5555"})
+			test_contact.save()
+			expect(Contact.list_numbers("Steve Smith")).to(eq(["555-555-5555"]))
+		end
+	end
 end
