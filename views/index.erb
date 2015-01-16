@@ -1,20 +1,18 @@
 <h1>Phone Book</h1>
 
-<h3>Add a Contact here:</h3>
+<h3>Add a number here:</h3>
 
-<form action="/contacts" method="post">
-  <label for='name'>Contacts name:</label>
-  <input id='name' name='name' type='text'>
+<form action="/phones" method="post">
+  <label for='new_number'>New Number and type</label>
+  <input id='new_number' name='new_number' type='text'>
   
-  <label for='number'>Contacts number:</label>
-  <input id='number' name='number' type='text'>
-  <button type="submit">Add Contact</button>
+  <button type="submit">New Number</button>
 </form>
 
 
-<h3>Here are your Contacts</h3>
+<h3>Here are your numbers to add</h3>
 <ul>
-  <% @contacts.each() do |contact| %>
-<li>Name: <a href="/contacts_page/<%= contact.name() %>"><%= contact.name() %></a> Number: <%= contact.number() %></li>
+  <% @phones.each() do |contact| %>
+<li><a href="/phones/<%= contact.id() %>"><%= contact.name() %></a></li>
 <% end %>
 </ul>

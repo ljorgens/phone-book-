@@ -31,7 +31,7 @@ class Phone
     	@@number_list = []
   	end
   	define_method(:number_type) do |type|
-  		@name.push(type)
+  		@contact.push(type)
 	end
 	define_singleton_method(:find) do |id|
     	found_number = nil

@@ -25,16 +25,16 @@ describe(Phone) do
     it("adds a number to the array of saved numbers") do
       test_contact1 = Phone.new("707-3535-4566 Work")
       test_contact1.save()
-      expect(phone.all()).to(eq([test_contact1]))
+      expect(Phone.all()).to(eq([test_contact1]))
     end
   end
   
   describe('#number_type') do
     it("adds a new number to a contact") do
       test_contact1 = Phone.new("707-3535-4566 Work")
-      test_contact2 = Contact.new("James Todd", "123-456-7890")
+      test_contact2 = Contact.new({:name => "Todd James", :number => "123-456-7890"})
       test_contact1.number_type(test_contact2)
-      expect(test_contact1.name()).to(eq([test_contact2]))
+      expect(test_contact1.contact()).to(eq([test_contact2]))
     end
   end
 
@@ -57,7 +57,7 @@ describe(Phone) do
       test_contact1 = Phone.new("707-3535-4566 Work")
       test_contact1.save()
       test_contact2 = Phone.new("707-3535-4566 Work")
-      test_contact12.save()
+      test_contact2.save()
       expect(Phone.find(test_contact1.id())).to(eq(test_contact1))
     end
   end
