@@ -1,18 +1,11 @@
 class Phone
+	attr_reader(:number, :type)
 	@@number_list = []
 	
-	define_method(:initialize) do |number|
-	@number	= number
-	@contact = []
+	define_method(:initialize) do |attributes|
+	@number	= attributes.fetch(:number)
+	@type = attributes.fetch(:type)
 	@id = @@number_list.length().+(1)
-	end
-	
-	define_method(:number) do
-	@number
-	end
-	
-	define_method(:contact) do
-	@contact
 	end
 	
 	define_method(:id) do

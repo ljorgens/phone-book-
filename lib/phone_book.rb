@@ -1,11 +1,11 @@
 class Contact
-	attr_reader(:name, :number)
+	attr_reader(:name)
 	
 	@@contact_list = []
 	
 	define_method(:initialize) do |attributes|
 		@name = attributes.fetch(:name)
-		@number = attributes.fetch(:number)
+		@contact = []
 		@id = @@contact_list.length().+(1)
 	end
 	
@@ -15,6 +15,14 @@ class Contact
 	
 	define_method(:save) do
 		@@contact_list.push(self)
+	end
+	
+	define_method(:add_number) do |number|
+		@contact.push(number)
+	end
+	
+	define_method(:contact) do
+		@contact
 	end
 	
 	define_singleton_method(:all) do
@@ -32,13 +40,14 @@ class Contact
 		end
 		contact_names.sort()
 	end
-	define_singleton_method(:list_numbers) do |contact|
-		contact_number = []
-	 	@@contact_list.each() do |contacts|
-			if contacts.name() == contact
-				contact_number.push(contacts.number())
-			end
-		end
-		contact_number
-	end
+	
+	define_singleton_method(:find) do |id|
+    	found_number = nil
+    	@@contact_list.each() do |numbers|
+      		if numbers.id().eql?(id)
+        		found_number = numbers
+      		end
+    	end
+   		found_number
+  	end
 end

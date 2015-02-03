@@ -3,34 +3,28 @@ require('sinatra/reloader')
 also_reload("./lib/**/*.rb")
 require('./lib/phone_book')
 require('./lib/phone')
+require('pry')
 
 get ("/") do
 	@contacts = Contact.all()
-	@phone = Phone.all()
 	erb(:index)
 end
 
-post ("/contacts") do
-	@name = params.fetch("name")
-	@number = params.fetch("number")
-	new_contact = Contact.new({:name => @name, :number => @number})
-	new_contact.save()
+post ("/add_contact") do
+	@new_contact = Contact.new({:name => params.fetch("new_contact")})
+	@new_contact.save()
 	@contacts = Contact.all()
 	erb(:index)
 end
 
-get('/contacts_page/:name') do
-  name = params.fetch('name')
-  @name1 = params.fetch('name')
-  @search_name = Contact.list_numbers(name)
-  erb(:contacts_page)
+get ("/contacts_page/:id") do
+	@new_contact = Contact.find(params.fetch("id").to_i())
+	erb(:contacts_page)
 end
 
-post("/new_types") do
-  @name = params.fetch('name')
-  @number = params.fetch('number')
-  @type = params.fetch('type2')
-  erb(:contacts_page)
-  end
-  
-  
+post ("/add_phone_number/:id") do
+	@new_contact = Contact.find(params.fetch("id").to_i())
+	new_phone = Phone.new({:number => params.fetch("new_phone_number"), :type => params.fetch("type")})
+	@new_contact.add_number(new_phone)
+	erb(:contacts_page)	
+end
